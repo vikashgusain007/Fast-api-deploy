@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9'
-        }
-    }
+    agent any
     environment {
         DOCKER_IMAGE = 'fastapi-celery-rabbitmq:latest'
     }
@@ -12,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}")
+                    sh "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
