@@ -1,6 +1,9 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'python:3.9'
+        }
+    }
     environment {
         DOCKER_IMAGE = 'fastapi-celery-rabbitmq:latest'
     }
@@ -9,7 +12,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Build the Docker image
                     docker.build("${DOCKER_IMAGE}")
                 }
             }
@@ -17,7 +19,6 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run tests (you can add test stages as needed)
                     echo "Running tests..."
                 }
             }
@@ -25,7 +26,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy using Docker Compose
                     sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
@@ -33,7 +33,6 @@ pipeline {
         stage('Clean Up') {
             steps {
                 script {
-                    // Stop and remove the Docker containers
                     sh 'docker-compose down'
                 }
             }
