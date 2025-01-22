@@ -29,7 +29,7 @@ pipeline {
         stage('Clean Up') {
             steps {
                 script {
-                    sh 'docker-compose down'
+                    echo "Deployment completed..."
                 }
             }
         }
