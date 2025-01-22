@@ -29,7 +29,7 @@ pipeline {
         stage('Clean Up') {
             steps {
                 script {
-                    echo "Deployment completed..."
+                    echo "Deployment completed......."
                 }
             }
         }
